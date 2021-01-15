@@ -3,17 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Models\Top;
+use App\Services\ModelSearch\RatingSearch;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
 class TopCategoryController extends Controller
 {
-    public function getPositions(Request $request)
+    public function getPositions(Request $request,RatingSearch $search)
     {
 
-        $top = new Top();
-        $top->date = time();
-        $top->ratings = json_encode(['test'=>'test']);
-        $top->save();
-        return redirect('/');
+        try{
+         $response = $search->getRatingByDate($request->date);
+        }catch (ModelNotFoundException $e){
+         $response = $search->getNotFoundResponse();
+        }
+
+        return $response;
     }
 }

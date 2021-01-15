@@ -9,7 +9,12 @@ use Illuminate\Support\Facades\Validator;
 
 class EnsureDateIsValid
 {
-    private const DATE_FORMAT = 'Y-m-d';
+    private $dateformat;
+
+    public function __construct()
+    {
+        $this->dateFormat = config('endpoint.dateformat');
+    }
 
     /**
      * Handle an incoming request.
@@ -21,7 +26,7 @@ class EnsureDateIsValid
     public function handle(Request $request, Closure $next)
     {
         $rules = [
-            'date'=> 'required|date_format:'.self::DATE_FORMAT
+            'date'=> 'required|date_format:'.$this->dateFormat
         ];
 
         $messages = [
@@ -29,7 +34,7 @@ class EnsureDateIsValid
             'date.date_format'=>'Invalid date format'
         ];
 
-       $validator = Validator::make(['date'=>$request->query('date')],$rules,$messages);
+       $validator = Validator::make(['date'=>$request->date],$rules,$messages);
 
        if($validator->fails()){
            return redirect()->action([ErrorController::class,'index']);

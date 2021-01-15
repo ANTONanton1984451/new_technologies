@@ -6,21 +6,21 @@ use App\Models\Top;
 use App\Services\Endpoint\Endpoint;
 use Illuminate\Console\Command;
 
-class SeedTable extends Command
+class DailyPoll extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'table:seed';
+    protected $signature = 'poll:daily';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Inserting into table ratings in the last thirty days';
+    protected $description = 'Command description';
 
     /**
      * Create a new command instance.
@@ -35,15 +35,12 @@ class SeedTable extends Command
     /**
      * Execute the console command.
      *
-     * @param Endpoint $endpoint
      * @return int
      */
     public function handle(Endpoint $endpoint)
     {
-        $rating = $endpoint->getRatingByMonth();
-
-        Top::insert($rating);
-
+        $rating = $endpoint->getRatingByDay();
+        Top::create($rating);
         return 0;
     }
 }

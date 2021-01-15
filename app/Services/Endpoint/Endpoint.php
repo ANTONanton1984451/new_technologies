@@ -25,7 +25,10 @@ class Endpoint
 
     public function getRatingByDay() : array
     {
-        return [];
+        $dayInterval = $this->formDayInterval();
+        $unHandledRating = $this->getter->getRatings($dayInterval['dayAgo'],$dayInterval['now']);
+
+        return $this->converter->convertRating($unHandledRating)[0];
     }
 
     public function getRatingByMonth() : array
@@ -42,6 +45,14 @@ class Endpoint
         $monthInterval['monthAgo'] = Carbon::now()->subDays(self::INTERVAL)->format($this->dateFormat);
 
         return  $monthInterval;
+    }
+
+    private function formDayInterval() : array
+    {
+        $dayInterval['now'] = Carbon::now()->format($this->dateFormat);
+        $dayInterval['dayAgo'] = '';
+
+        return $dayInterval;
     }
 
 }

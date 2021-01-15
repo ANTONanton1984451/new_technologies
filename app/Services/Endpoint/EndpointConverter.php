@@ -8,7 +8,16 @@ class EndpointConverter
 {
     public function convertRating(array $unhandledRating) : array
     {
-        
+        $ratingForEntity = [];
+        $compiledUpRating = $this->makeUpRating($unhandledRating);
+
+        $iterator = 0;
+        foreach ($compiledUpRating as $date => $ratingList){
+            $ratingForEntity[$iterator]['date'] = strtotime($date);
+            $ratingForEntity[$iterator]['ratings'] = json_encode($ratingList);
+            $iterator++;
+        }
+        return $ratingForEntity;
     }
 
     private function makeUpRating(array $unhandledRating) : array

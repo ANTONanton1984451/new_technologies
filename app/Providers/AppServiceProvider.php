@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Services\Endpoint\Endpoint;
 use App\Services\Endpoint\EndpointConverter;
 use App\Services\Endpoint\EndpointGetter;
+use App\Services\ModelSearch\RatingSearch;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -18,6 +19,8 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind(EndpointGetter::class,EndpointGetter::class);
         $this->app->bind(EndpointConverter::class,EndpointConverter::class);
+
+        $this->app->bind(RatingSearch::class,RatingSearch::class);
     }
 
     /**

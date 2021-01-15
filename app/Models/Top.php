@@ -9,13 +9,25 @@ class Top extends Model
 {
     use HasFactory;
 
+
     protected $fillable = [
        'date',
        'ratings'
     ];
 
+
+    public $hidden = [
+       'date'
+    ];
+
+
     public $incrementing = false;
     public $timestamps = false;
 
     protected $primaryKey = 'date';
+
+    public function getRatingsAttribute($value)
+    {
+        return json_decode($value,true);
+    }
 }
