@@ -2,14 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 
 class ErrorController extends Controller
 {
     public function index()
     {
-        $
+        $message = [
+          'status_code' => 500,
+          'message' => 'invalid date format'
+        ];
 
-        return response()->json(array_merge($status,$message),500);
+        return response()->json($message,500);
+    }
+
+    public function requestsCount()
+    {
+        $message = [
+            'status_code' => 500,
+            'message' => 'too few requests per minute'
+        ];
+
+        return response()->json($message,403);
     }
 }

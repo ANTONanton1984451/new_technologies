@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
+use App\Contracts\IPStorage;
 use App\Services\Endpoint\Endpoint;
 use App\Services\Endpoint\EndpointConverter;
 use App\Services\Endpoint\EndpointGetter;
+use App\Services\IPStorages\RedisStorage;
 use App\Services\ModelSearch\RatingSearch;
 use Illuminate\Support\ServiceProvider;
 
@@ -21,6 +23,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(EndpointConverter::class,EndpointConverter::class);
 
         $this->app->bind(RatingSearch::class,RatingSearch::class);
+
+        $this->app->bind(IPStorage::class,RedisStorage::class);
     }
 
     /**
@@ -31,8 +35,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->app->bind(Endpoint::class,function ($app){
+
             return new Endpoint($app->make(EndpointConverter::class),
                                 $app->make(EndpointGetter::class));
+
 
         });
     }

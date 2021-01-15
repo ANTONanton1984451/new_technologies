@@ -29,12 +29,7 @@ class EnsureDateIsValid
             'date'=> 'required|date_format:'.$this->dateFormat
         ];
 
-        $messages = [
-            'date.required'=>'Missing date query parameter',
-            'date.date_format'=>'Invalid date format'
-        ];
-
-       $validator = Validator::make(['date'=>$request->date],$rules,$messages);
+       $validator = Validator::make(['date'=>$request->date],$rules);
 
        if($validator->fails()){
            return redirect()->action([ErrorController::class,'index']);

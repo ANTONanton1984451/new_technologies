@@ -13,7 +13,7 @@ class SeedTable extends Command
      *
      * @var string
      */
-    protected $signature = 'table:seed';
+    protected $signature = 'table:insert';
 
     /**
      * The console command description.
@@ -40,9 +40,9 @@ class SeedTable extends Command
      */
     public function handle(Endpoint $endpoint)
     {
-        $rating = $endpoint->getRatingByMonth();
+        $ratingList = $endpoint->getRatingByMonth();
 
-        Top::insert($rating);
+        Top::insert($ratingList);
 
         return 0;
     }

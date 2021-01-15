@@ -5,11 +5,20 @@ namespace App\Services\ModelSearch;
 
 
 use App\Models\Top;
-use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\JsonResponse;
+
 
 class RatingSearch
 {
-    public function getRatingByDate(int $date)
+    /**
+     * @param int $date
+     * @return \Illuminate\Http\JsonResponse
+     * @throws ModelNotFoundException
+     * Поиск модели по дате и выдача ответа в json формате.
+     * Вынос логики в сервис класс
+     */
+    public function getRatingByDate(int $date) : JsonResponse
     {
         $model = Top::findOrFail($date);
 
@@ -22,7 +31,11 @@ class RatingSearch
         return response()->json($response);
     }
 
-    public function getNotFoundResponse()
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     * Вынос логики в сервис класс
+     */
+    public function getNotFoundResponse() : JsonResponse
     {
         $response = [
             'status_code' => 404,

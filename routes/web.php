@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/appTopCategory',
             [\App\Http\Controllers\TopCategoryController::class,'getPositions']
-            )->middleware([\App\Http\Middleware\EnsureDateIsValid::class,\App\Http\Middleware\StrToTime::class]);
+            )->middleware('endpoint');
 
-Route::get('/error',[\App\Http\Controllers\ErrorController::class,'index']);
+Route::get('/paramsError',[\App\Http\Controllers\ErrorController::class,'index']);
+
+Route::get('/',[\App\Http\Controllers\ErrorController::class,'requestsCount']);

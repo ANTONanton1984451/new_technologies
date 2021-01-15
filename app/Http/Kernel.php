@@ -2,6 +2,9 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\EnsureDateIsValid;
+use App\Http\Middleware\ProtectionIP;
+use App\Http\Middleware\StrToTime;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -43,6 +46,12 @@ class Kernel extends HttpKernel
             'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
+
+        'endpoint' => [
+            ProtectionIP::class,
+            EnsureDateIsValid::class,
+            StrToTime::class,
+        ]
     ];
 
     /**

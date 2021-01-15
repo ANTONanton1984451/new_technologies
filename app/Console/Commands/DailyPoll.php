@@ -13,14 +13,14 @@ class DailyPoll extends Command
      *
      * @var string
      */
-    protected $signature = 'poll:daily';
+    protected $signature = 'pull:daily';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'If you will schedule this command it will be poll endpoint every day and store data in db';
 
     /**
      * Create a new command instance.
@@ -35,6 +35,7 @@ class DailyPoll extends Command
     /**
      * Execute the console command.
      *
+     * @param Endpoint $endpoint
      * @return int
      */
     public function handle(Endpoint $endpoint)
