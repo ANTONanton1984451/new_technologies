@@ -2,7 +2,11 @@
     Endpoint for New Technologies
 </h1>
 <br>
+<p>
+    Затрачено время : <i>около 6-7 часов</i>
+</p>
 <ul>
+    
     <li>
         Версия PHP - 7.4
     </li>
@@ -11,6 +15,9 @@
     </li>
     <li>
         Версия Redis - 4.0
+    </li>
+    <li>
+        Запускал всё на OpenServer
     </li>
 </ul>
 <h3>Что реализовано : </h3>
